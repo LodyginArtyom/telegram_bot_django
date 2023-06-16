@@ -11,4 +11,17 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+
+class Message(models.Model):
+    profile = models.ForeignKey(to=Profile, verbose_name='Пользователь', on_delete=models.PROTECT)
+    text = models.TextField(verbose_name='Сообщение')
+    created_at = models.DateTimeField(verbose_name='Время получения', auto_now_add=True)
+
+    def __str__(self):
+        return f'Сообщение от {self.profile.name} {self.pk}'
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
 # Create your models here.
